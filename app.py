@@ -13,7 +13,7 @@ from threading import Thread
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'secret!'
 socketio = SocketIO(app)
-cache = redis.Redis(host='localhost', port=6379)
+cache = redis.Redis(host='redis', port=6379)
 
 def get_hit_count():
     retries = 5
@@ -69,7 +69,7 @@ def hello():
 @app.route('/send_command', methods=['POST'])
 def command():
 
-    connection = pika.BlockingConnection(pika.ConnectionParameters(host='localhost'))
+    connection = pika.BlockingConnection(pika.ConnectionParameters(host='rabbit'))
     channel = connection.channel()
     channel.queue_declare(queue='text')
 
