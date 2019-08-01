@@ -69,7 +69,7 @@ def hello():
 @app.route('/send_command', methods=['POST'])
 def command():
 
-    connection = pika.BlockingConnection(pika.ConnectionParameters(host='rabbit'))
+    connection = pika.BlockingConnection(pika.ConnectionParameters(host='rabbitmq'))
     channel = connection.channel()
     channel.queue_declare(queue='text')
 
