@@ -1,0 +1,102 @@
+<html>
+  <head>
+    {% if title %}
+    <title>{{title}}</title>
+    {% else %}
+    <title>gate</title>
+    {% endif %}
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
+
+
+
+  </head>
+  <body>
+    <div class="toolbar"></div>
+    <div class="frame">
+      <div class="grid header">
+        out: request - response
+      </div>
+      <ul class="window" id="out">
+        {% for key,value in messages_out %}
+        <li class="row">
+          <div id="{{'10'+key}}">{{ value[0] }}</div>
+          <div id="{{'12'+key}}">{{ value[1] }}</div>
+        </li>
+        {% endfor %}
+      </ul>
+      <div class="status_bar">
+        <form metod="POST" id="command_form" action="/send_command">
+        <input type=text name="command" value="24 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00"/>
+        <button type="submit">send</button>
+      </form>
+      </div>
+    </div>
+
+    <div class="frame">
+      <div class="grid header">
+        in: request - response
+      </div>
+      <ul class="window" id="in">
+        {% for key,value in messages_in %}
+        <li class="row">
+          <div id="{{'11'+key}}">{{ value[0] }}</div>
+          <div id="{{'13'+key}}">{{ value[1] }}</div>
+        </li>
+        {% endfor %}
+      </ul>
+      <div class="status_bar">
+      </div>
+    </div>
+
+    <div class="footer"></div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.2.0/socket.io.js"></script>
+    <script src="https://code.jquery.com/jquery-1.11.1.js"></script>
+    <script>
+
+      var inObj = $('#in')
+      var h = inObj.get(0).scrollHeight;
+      inObj.animate({scrollTop: h});
+
+      var outObj = $('#out')
+      var j = outObj.get(0).scrollHeight;
+      outObj.animate({scrollTop: j});
+
+      var socket = io('ws://localhost:5000');
+      socket.on('connect', function () {
+        console.log('connected');
+      });
+
+      socket.on('transaction', function(msg) {
+        if( msg.type == '11' ) {
+          inObj
+            .append($('<li class="row fadein">').attr("id", msg.id)
+            .append($('<div>').text(msg.data), $('<div>')));
+          var h = inObj.get(0).scrollHeight;
+          inObj.animate({scrollTop: h});
+        }
+        if( msg.type == '12' ) {
+          inObj.find('#'+msg.id).children()[1].text(msg.data);
+        }
+
+
+        if( msg.type == '10' ) {
+          outObj
+            .append($('<li class="row fadein">').attr("id", msg.id)
+            .append($('<div>').text(msg.data), $('<div>')));
+          var h = outObj.get(0).scrollHeight;
+          outObj.animate({scrollTop: h});
+        }
+        if( msg.type == '13' ) {
+          outObj.find('#'+msg.id).children()[1].next().text(msg.data);
+        }
+      });
+
+
+      $( "#command_form" ).submit(function( event ) {
+        $.post("/send_command", $( "#command_form" ).serialize());
+        event.preventDefault();
+      });
+    </script>
+  </body>
+</html>

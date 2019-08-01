@@ -1,0 +1,150 @@
+@font-face {
+    font-family: 'Ubuntu';
+    src: local('Ubuntu Light'), local('Ubuntu-Light'), url('font/ubuntulight.woff2') format('woff2'), url('font/ubuntulight.woff') format('woff'), url('font/ubuntulight.ttf') format('truetype');
+    font-weight: 300;
+    font-style: normal;
+}
+@font-face {
+    font-family: 'Ubuntu';
+    src: local('Ubuntu Light Italic'), local('Ubuntu-LightItalic'), url('font/ubuntulightitalic.woff2') format('woff2'), url('font/ubuntulightitalic.woff') format('woff'), url('font/ubuntulightitalic.ttf') format('truetype');
+    font-weight: 300;
+    font-style: italic;
+}
+@font-face {
+    font-family: 'Ubuntu';
+    src: local('Ubuntu'), url('font/ubuntu.woff2') format('woff2'), url('font/ubuntu.woff') format('woff'), url('font/ubuntu.ttf') format('truetype');
+    font-weight: 400;
+    font-style: normal;
+}
+@font-face {
+    font-family: 'Ubuntu';
+    src: local('Ubuntu Italic'), local('Ubuntu-Italic'), url('font/ubuntuitalic.woff2') format('woff2'), url('font/ubuntuitalic.woff') format('woff'), url('font/ubuntuitalic.ttf') format('truetype');
+    font-weight: 400;
+    font-style: italic;
+}
+@font-face {
+    font-family: 'Ubuntu';
+    src: local('Ubuntu Medium'), local('Ubuntu-Medium'), url('font/ubuntumedium.woff2') format('woff2'), url('font/ubuntumedium.woff') format('woff'), url('font/ubuntumedium.ttf') format('truetype');
+    font-weight: 500;
+    font-style: normal;
+}
+@font-face {
+    font-family: 'Ubuntu';
+    src: local('Ubuntu Medium Italic'), local('Ubuntu-MediumItalic'), url('font/ubuntumediumitalic.woff2') format('woff2'), url('font/ubuntumediumitalic.woff') format('woff'), url('font/ubuntumediumitalic.ttf') format('truetype');
+    font-weight: 500;
+    font-style: italic;
+}
+@font-face {
+    font-family: 'Ubuntu';
+    src: local('Ubuntu Bold'), local('Ubuntu-Bold'), url('font/ubuntubold.woff2') format('woff2'), url('font/ubuntubold.woff') format('woff'), url('font/ubuntubold.ttf') format('truetype');
+    font-weight: 700;
+    font-style: normal;
+}
+@font-face {
+    font-family: 'Ubuntu';
+    src: local('Ubuntu Bold Italic'), local('Ubuntu-BoldItalic'), url('font/ubuntubolditalic.woff2') format('woff2'), url('font/ubuntubolditalic.woff') format('woff'), url('font/ubuntubolditalic.ttf') format('truetype');
+    font-weight: 700;
+    font-style: italic;
+}
+
+
+html {
+}
+
+body {
+  font-family: Ubuntu;
+  font-size: 10px;
+  margin: 0;
+  height: 100vh;
+  display: grid;
+  grid-template-rows: 1px minmax(10px, 1fr)  minmax(10px, 1fr) 1px;
+  grid-template-columns: 1fr;
+  grid-gap: 1vw;
+}
+
+
+h1 {
+  margin:0; 
+  padding: 0 22px;
+  margin-top: 16px;
+  margin-bottom: 4px;
+}
+
+ul, li {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+
+form {
+	display: flex;
+	border-top: 1px solid #c3c3c3;
+	margin: 0;
+}
+.status_bar input[type="text"]{
+	flex-grow: 1;
+	border: none;
+	padding: 8px 6px;
+}
+
+
+
+.frame {
+  border: 1px solid #c3c3c3;
+  border-radius: 4px;
+  box-shadow: 0px 2px 3px 0px rgba(50,50,50,0.11);
+  margin: 0 16px;
+
+  display: grid;
+  grid-template-rows: fit-content(50px) minmax(10px, 1fr);
+  grid-template-columns: 1fr;
+
+}
+.header{
+  background-color: #c3c3c3;
+  padding: 0 9px;
+  line-height: 30px;
+  vertical-align: top;
+  padding: 2px 9px 0;
+  margin-bottom: 4px;
+  font-size: 14px;
+}
+.header > div {
+  text-align: center;
+  font-size: 12px;
+}
+
+.window {
+  overflow: auto;
+  overflow-scrolling: auto
+}
+.row { 
+  display: flex;
+  align-content: stretch;
+
+}
+.row > div {
+  padding: 5px;
+  width: 0;
+  flex-grow: 1;
+  flex-shrink: 1;
+}
+
+.fadein {
+  animation: drop 100ms;
+  -webkit-animation: drop 300ms;
+}
+
+
+@keyframes drop {
+	0% {
+	    opacity: 0;
+	    transform: translateY(20px);
+	}
+	100% {
+	    opacity: 1;
+	    transform: translateY(0px);
+	}
+}
+
