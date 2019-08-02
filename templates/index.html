@@ -89,7 +89,7 @@
           outObj.animate({scrollTop: h});
         }
         if( msg.type == '13' ) {
-          respOutObj = outObj.find('#'+msg.id).children()[0].next().text(msg.data);
+          respOutObj = outObj.find('#'+msg.id).children()[1];
           respOutObj.text(msg.data)
         }
       });
