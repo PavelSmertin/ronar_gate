@@ -76,7 +76,7 @@
           inObj.animate({scrollTop: h});
         }
         if( msg.type == '12' ) {
-          respInObj = inObj.find('#'+msg.id).children()[1];
+          respInObj = inObj.find('#'+msg.id+':last')[0].children()[1];
           $(respInObj).text(msg.data)
         }
 
@@ -89,7 +89,7 @@
           outObj.animate({scrollTop: h});
         }
         if( msg.type == '13' ) {
-          respOutObj = outObj.find('#'+msg.id).children()[1];
+          respOutObj = outObj.find('#'+msg.id+':last').children()[1];
           $(respOutObj).text(msg.data)
         }
       });
