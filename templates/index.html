@@ -70,7 +70,7 @@
       socket.on('transaction', function(msg) {
         if( msg.type == '11' ) {
           inObj
-            .append($('<li class="row fadein">').attr("class", msg.id)
+            .append($('<li class="row fadein">').addClass(msg.id)
             .append($('<div>').text(msg.data), $('<div>')));
           var h = inObj.get(0).scrollHeight;
           inObj.animate({scrollTop: h});
@@ -83,7 +83,7 @@
 
         if( msg.type == '10' ) {
           outObj
-            .append($('<li class="row fadein">').attr("class", msg.id)
+            .append($('<li class="row fadein">').addClass(msg.id)
             .append($('<div>').text(msg.data), $('<div>')));
           var h = outObj.get(0).scrollHeight;
           outObj.animate({scrollTop: h});
