@@ -18,9 +18,9 @@
       </div>
       <ul class="window" id="out">
         {% for key,value in messages_out %}
-        <li class="row">
-          <div id="{{'10'+key}}">{{ value[0] }}</div>
-          <div id="{{'12'+key}}">{{ value[1] }}</div>
+        <li class="row {{key}}">
+          <div>{{ value[0] }}</div>
+          <div>{{ value[1] }}</div>
         </li>
         {% endfor %}
       </ul>
@@ -38,9 +38,9 @@
       </div>
       <ul class="window" id="in">
         {% for key,value in messages_in %}
-        <li class="row">
-          <div id="{{'11'+key}}">{{ value[0] }}</div>
-          <div id="{{'13'+key}}">{{ value[1] }}</div>
+        <li class="row {{key}}">
+          <div>{{ value[0] }}</div>
+          <div>{{ value[1] }}</div>
         </li>
         {% endfor %}
       </ul>
@@ -70,26 +70,26 @@
       socket.on('transaction', function(msg) {
         if( msg.type == '11' ) {
           inObj
-            .append($('<li class="row fadein">').attr("id", msg.id)
+            .append($('<li class="row fadein">').attr("class", msg.id)
             .append($('<div>').text(msg.data), $('<div>')));
           var h = inObj.get(0).scrollHeight;
           inObj.animate({scrollTop: h});
         }
         if( msg.type == '12' ) {
-          respInObj = inObj.find('#'+msg.id+':last').children()[1];
+          respInObj = inObj.find('.'+msg.id+':last').children()[1];
           $(respInObj).text(msg.data)
         }
 
 
         if( msg.type == '10' ) {
           outObj
-            .append($('<li class="row fadein">').attr("id", msg.id)
+            .append($('<li class="row fadein">').attr("class", msg.id)
             .append($('<div>').text(msg.data), $('<div>')));
           var h = outObj.get(0).scrollHeight;
           outObj.animate({scrollTop: h});
         }
         if( msg.type == '13' ) {
-          respOutObj = outObj.find('#'+msg.id+':last').children()[1];
+          respOutObj = outObj.find('.'+msg.id+':last').children()[1];
           $(respOutObj).text(msg.data)
         }
       });
