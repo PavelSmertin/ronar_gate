@@ -62,7 +62,7 @@
       var j = outObj.get(0).scrollHeight;
       outObj.animate({scrollTop: j});
 
-      var socket = io('ws://localhost:5000');
+      var socket = io('ws://78.46.193.86:5000');
       socket.on('connect', function () {
         console.log('connected');
       });
