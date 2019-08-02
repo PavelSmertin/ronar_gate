@@ -77,7 +77,7 @@
         }
         if( msg.type == '12' ) {
           respInObj = inObj.find('#'+msg.id).children()[1];
-          respInObj.text(msg.data)
+          $(respInObj).text(msg.data)
         }
 
 
@@ -90,7 +90,7 @@
         }
         if( msg.type == '13' ) {
           respOutObj = outObj.find('#'+msg.id).children()[1];
-          respOutObj.text(msg.data)
+          $(respOutObj).text(msg.data)
         }
       });
 
