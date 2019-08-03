@@ -8,7 +8,16 @@ from flask import request
 from flask_socketio import SocketIO
 from flask_socketio import send, emit
 
+import telebot
+
 from threading import Thread
+
+
+
+API_TOKEN = '839592315:AAH8wX2K6ojVExaYPB7F8fuE6rXO52rk11k'
+
+bot = telebot.TeleBot(API_TOKEN)
+
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'secret!'
@@ -102,8 +111,29 @@ def get_emit(msg):
         'data': " ".join(["{:02x}".format(x).upper() for x in msg[2:]])
     }
 
+
+
+# Handle '/start' and '/help'
+@bot.message_handler(commands=['help', 'start'])
+def send_welcome(message):
+    bot.reply_to(message, """\
+Hi there, I am EchoBot.
+I am here to echo your kind words back to you. Just say anything nice and I'll say the exact same thing to you!\
+""")
+
+
+# Handle all other messages with content_type 'text' (content_types defaults to ['text'])
+@bot.message_handler(func=lambda message: True)
+def echo_message(message):
+    bot.reply_to(message, message.text)
+
+
+def start_bot():
+    bot.polling()
+
 if __name__ == '__main__':
     Thread(target=sub_stream).start()
+    Thread(target=start_bot).start()
     socketio.run(app, host='0.0.0.0', port=5000)
 
 
