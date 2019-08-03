@@ -110,9 +110,9 @@ def sub_events():
     for item in pubsub.listen():
         if item['data'] == 1:
             continue
-        if tele_msg:
-            # bot.send_message('-344086809', tele_msg)
-            bot.send_message('-1001485120003', item['data'])
+
+        # bot.send_message('-344086809', tele_msg)
+        bot.send_message('-1001485120003', item['data'])
 
 def get_emit(msg):
     return { 
