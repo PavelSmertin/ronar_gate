@@ -103,10 +103,16 @@ def sub_stream():
     for item in pubsub.listen():
         if isinstance(item['data'], bytes):
             socketio.emit('transaction', get_emit(item['data']))
-            tele_msg = get_command(item['data'])
-            if tele_msg:
-                bot.send_message('-344086809', tele_msg)
 
+def sub_events():
+    pubsub = cache.pubsub()
+    pubsub.subscribe(['events'])
+    for item in pubsub.listen():
+        if item['data'] == 1:
+            continue
+        if tele_msg:
+            # bot.send_message('-344086809', tele_msg)
+            bot.send_message('-1001485120003', item['data'])
 
 def get_emit(msg):
     return { 
@@ -136,6 +142,7 @@ def start_bot():
 
 if __name__ == '__main__':
     Thread(target=sub_stream).start()
+    Thread(target=sub_events).start()
     Thread(target=start_bot).start()
     socketio.run(app, host='0.0.0.0', port=5000)
 
