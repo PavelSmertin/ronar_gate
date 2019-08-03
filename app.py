@@ -116,7 +116,7 @@ def get_emit(msg):
     }
 
 def get_command(msg):
-    return " ".join(["{:02x}".format(x).upper() for x in msg[2:]])
+    return False #" ".join(["{:02x}".format(x).upper() for x in msg[2:]])
 
 
 # Handle '/start' and '/help'
