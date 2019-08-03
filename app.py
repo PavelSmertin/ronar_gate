@@ -103,8 +103,10 @@ def sub_stream():
     for item in pubsub.listen():
         if isinstance(item['data'], bytes):
             socketio.emit('transaction', get_emit(item['data']))
-            # if is_command(item['data']):
-            #     bot.send_message('@my_channel_name', item['data'])
+            tele_msg = get_command(item['data'])
+            if tele_msg:
+                bot.send_message('-344086809', tele_msg)
+
 
 def get_emit(msg):
     return { 
@@ -113,8 +115,8 @@ def get_emit(msg):
         'data': " ".join(["{:02x}".format(x).upper() for x in msg[2:]])
     }
 
-def is_command(msg):
-    return True
+def get_command(msg):
+    return " ".join(["{:02x}".format(x).upper() for x in msg[2:]])
 
 
 # Handle '/start' and '/help'
